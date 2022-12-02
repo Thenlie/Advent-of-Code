@@ -19,7 +19,6 @@ int main(void) {
         }
         if (c == 32) continue;
         if (c == 10) {
-            printf("%c, %c\n", opponent_move, my_move);
             switch (opponent_move) {
                 // Rock
                 case 65:
@@ -74,7 +73,6 @@ int main(void) {
             my_move = c;
             myTurn = false;
         }
-        printf("%c", c);
     } while (1);
 
     printf("answer: %i\n", score);

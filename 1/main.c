@@ -26,7 +26,6 @@ int main(void) {
             } else if (elf_count > three) {
                 three = elf_count;
             }
-            printf("%i\n", elf_count);
             elf_count = 0;
         }
         int x = atoi(buf);
@@ -34,5 +33,7 @@ int main(void) {
     }
     printf("max: %i, 2: %i, 3: %i\n", max, two, three);
     printf("total: %i\n", max + two + three);
+
+    fclose(f);
     return 0;
 }
