@@ -1,7 +1,7 @@
 #!/bin/bash
 
-mkdir $1
-cd $1
+mkdir "$1"
+cd "$1"
 touch main.c build.sh
 echo $'#!/bin/bash\n\nclang -Wall -Wextra -Wpedantic -Werror -Wshadow -Wformat=2 -Wconversion -Wunused-parameter main.c -o main' > build.sh
 chmod +x ./build.sh
