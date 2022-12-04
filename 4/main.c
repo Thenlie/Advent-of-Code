@@ -37,7 +37,6 @@ int main (void) {
             }
         }
         
-        // verify contents of array
         if (count == 3) {
             for (int j = 0; j < 4; j++) {
                 printf("%i ", arr[j]);
@@ -45,15 +44,10 @@ int main (void) {
             printf("\n");
 
             // compare 1-3
-            if (arr[0] <= arr[2] && arr[1] >= arr[3]) {
+            if (arr[1] < arr[2] || arr[3] < arr[0]) {
                 total++;
                 continue;
             }        
-            // compare 2-4
-            if (arr[0] >= arr[2] && arr[1] <= arr[3]) {
-                total++;
-                continue;
-            }
         }
     }
 
