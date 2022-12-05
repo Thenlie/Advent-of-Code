@@ -49,6 +49,7 @@ int main (void) {
     print_stack();
 
     fclose(f);
+    free(buf);
     return 0;
 }
 
@@ -60,11 +61,11 @@ void move_containers(int from, int to, int n) {
     for(int j = 0; stack[to][j]; j++) { to_len++; }    
 
     // move containers n times
-    for(int i = 0; i < n; i++) {
-        stack[to][to_len] = stack[from][from_len-1];
-        stack[from][from_len-1] = '\0';
+    for(int i = n; i > 0; i--) {
+        stack[to][to_len] = stack[from][from_len-i];
+        stack[from][from_len-i] = '\0';
         to_len++;
-        from_len--;
+//        from_len--;
     }
 
     return;
