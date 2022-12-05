@@ -1,7 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #define STACK_MAX 64
 
 void move_containers(int from, int to, int n);
+void print_stack();
 
 // Provided initial stack
 char stack[9][STACK_MAX] = {
@@ -23,22 +26,27 @@ int main (void) {
         return 1;
     } 
 
-    move_containers(0, 7, 2);
+    print_stack();
 
-    //Displaying array elements
-    printf("Two Dimensional array elements:\n");
-    int i, j;
-    for(i=0; i<9; i++) {
-        for(j=0; stack[i][j]; j++) {
-            printf("%c ", stack[i][j]);
+    char *buf = malloc(sizeof(char) * 25);
+    // read input.txt line
+    while (fgets(buf, 25, f)) {
+        int len = (int)strlen(buf);
+        int to, from, n;
+        // check if n is 1 or 2 digits
+        if (len == 19) {
+            to = buf[17] - 48;
+            from = buf[12] - 48;
+            n = buf[5] - 48;
+        } else {
+            to = buf[18] - 48;
+            from = buf[13] - 48;
+            n = (buf[5] - 48) * 10 + (buf[6] - 48);
         }
-        printf("\n");
+        move_containers(from-1, to-1, n);
     }
 
-    // loop through inner array once to get length
-    // remove from top of specified stack
-    // place on top of a different stack
-    // repeat n times
+    print_stack();
 
     fclose(f);
     return 0;
@@ -59,5 +67,18 @@ void move_containers(int from, int to, int n) {
         from_len--;
     }
 
+    return;
+}
+
+void print_stack() {
+    //Displaying array elements
+    printf("Two Dimensional array elements:\n");
+    int i, j;
+    for(i=0; i<9; i++) {
+        for(j=0; stack[i][j]; j++) {
+            printf("%c ", stack[i][j]);
+        }
+        printf("\n");
+    }
     return;
 }
