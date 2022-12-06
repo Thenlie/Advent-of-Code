@@ -17,7 +17,6 @@ int main (void) {
     do {
         int c = fgetc(f);
         if (feof(f)) break;
-        printf("Answer: \n");
 
         if (count < 14) {
             queue[count] = c;            
@@ -32,6 +31,7 @@ int main (void) {
         }
     } while (1); 
 
+    free(queue);
     fclose(f);
     return 0;
 }
