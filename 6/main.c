@@ -11,30 +11,24 @@ int main (void) {
         return 1;
     } 
 
-    int *queue = malloc(sizeof(int) * 4);
-
-    queue[0] = fgetc(f);
-    queue[1] = fgetc(f);
-    queue[2] = fgetc(f);
-    queue[3] = fgetc(f);
-
-    if (check_queue(queue) == 0) {
-        printf("Answer: 4\n");
-        fclose(f);
-        return 0;
-    }
-
-    int count = 4;
+    int *queue = malloc(sizeof(int) * 14);
+    int count = 0;
     
     do {
-        count++;
         int c = fgetc(f);
         if (feof(f)) break;
+        printf("Answer: \n");
 
-        push_to_queue(c, queue); 
-        if (check_queue(queue) == 0) {
-            printf("Answer: %i\n", count);
-            break;
+        if (count < 14) {
+            queue[count] = c;            
+            count++;
+        } else {
+            push_to_queue(c, queue); 
+            if (check_queue(queue) == 0) {
+                printf("Answer: %i\n", count + 1);
+                break;
+            }
+            count++;
         }
     } while (1); 
 
@@ -43,24 +37,23 @@ int main (void) {
 }
 
 void push_to_queue(int c, int *queue) {
-    queue[0] = queue[1];
-    queue[1] = queue[2];
-    queue[2] = queue[3];
-    queue[3] = c;
+    for (int i = 0; i < 14; i++) { 
+        if (i == 13) {
+            queue[i] = c;
+        } else {
+            queue[i] = queue[i+1];
+        }
+    }
 }
 
 int check_queue(int *queue) {
-    if (
-        queue[0] != queue[1] &&
-        queue[0] != queue[2] &&
-        queue[0] != queue[3] &&
-        queue[1] != queue[2] &&
-        queue[1] != queue[3] &&
-        queue[2] != queue[3]
-    ) {
-        printf("%c%c%c%c\n", queue[0], queue[1], queue[2], queue[3]);
-        return 0;
-    } else {
-        return 1;
+    int abc[52] = {0};
+
+    for (int i = 0; i < 14; i++) {
+        abc[queue[i] - 97]++;
+        if (abc[queue[i] - 97] > 1) {
+            return 1;
+        }
     }
+    return 0;
 }
