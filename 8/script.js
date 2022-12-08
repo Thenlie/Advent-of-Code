@@ -1,9 +1,9 @@
 const fs = require('fs');
-const data = fs.readFileSync('short-input.txt', 'utf8');
+const data = fs.readFileSync('input.txt', 'utf8');
 const data_array = data.split('\n');
 const map = [];
 data_array.forEach(line => map.push(line.split('')));
-total = 0;
+let total = 0;
 
 // loop over all trees
 for (let i = 0; i < map.length; i++) {
@@ -11,61 +11,39 @@ for (let i = 0; i < map.length; i++) {
         // check up down left right
         // if ever visible, add 1 to total
         const val = map[i][j];
-        let isVisible = true;
-        if (i === 0 || j == 0 || i === map.length-1 || j === map[0].length-1) {
-            console.log('win', map[i][j]);
-            total++;
-            continue; 
-        }
         // up
-        for (let a = 0; a < i; a++) {
+        let up = 0;
+        for (let a = i-1; a >= 0; a--) {
+            up++;
             if (map[a][j] >= val) {
-                console.log('lose1', map[i][j])
-                isVisible = false;
                 break;
             }
         }
-        if (isVisible) {
-            total++;
-            continue;
-        }
-        isVisible = true;
         // down
+        let down = 0;
         for (let b = i+1; b < map.length; b++) {
+            down++;
             if (map[b][j] >= val) {
-                console.log('lose2', map[i][j])
-                isVisible = false;
                 break;
             }
         }
-        if (isVisible) {
-            total++;
-            continue;
-        }
-        isVisible = true;
         // left
-        for (let c = 0; c < j; c++) {
+        let left = 0;
+        for (let c = j-1; c >= 0; c--) {
+            left++;
             if (map[i][c] >= val) {
-                console.log('lose3', map[i][j])
-                isVisible = false;
                 break;
             }
         }
-        if (isVisible) {
-            total++;
-            continue;
-        }
-        isVisible = true;
         // right
+        let right = 0;
         for (let d = j+1; d < map[j].length; d++) {
+            right++;
             if (map[i][d] >= val) {
-                console.log('lose4', map[i][j])
-                isVisible = false;
                 break;
             }
         }
-        if (isVisible) total++;
-        isVisible = true;
+        if (total < (up * down * right * left)) total = (up * down * right * left);
     }
 }
 
