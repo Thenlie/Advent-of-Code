@@ -31,7 +31,7 @@ data_array.forEach(line => {
     else if (words[0] !== 'dir') file_handler(words);
 });
 
-total.map(item => {
+dtotal.map(item => {
     if (item.size >= 1272621) {
         console.log(item.name, item.size)
     }
