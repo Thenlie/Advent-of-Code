@@ -31,9 +31,12 @@ data_array.forEach(line => {
     else if (words[0] !== 'dir') file_handler(words);
 });
 
-console.table(total)
+total.map(item => {
+    if (item.size >= 1272621) {
+        console.log(item.name, item.size)
+    }
+})
 const answer = total.filter(x => x.size <= 100000);
-console.table(answer)
 let sum = 0;
 answer.forEach(ans => sum += ans.size)
 console.log(sum);
