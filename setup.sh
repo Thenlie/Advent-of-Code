@@ -2,14 +2,14 @@
 
 # Verfiy command line argument
 if [[ ! $1 ]]; then
-    echo "Error: missing argument! Usage './setup.sh <day>'"
+    echo "Error: missing argument! Usage: './setup.sh <day>'"
     exit 1
 fi
 
 # Create new directory and files
 mkdir "$1"
 cd "$1"
-touch main.c build.sh
+touch main.c build.sh input.txt
 
 # Write boilerplate to files, run first build
 echo $'#!/bin/bash\n\nclang -Wall -Wextra -Wpedantic -Werror -Wshadow -Wformat=2 -Wconversion -Wunused-parameter main.c -o main' > build.sh
