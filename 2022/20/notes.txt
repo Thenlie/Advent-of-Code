@@ -1,0 +1,7 @@
+Take initial arrangement of values, store in array 'ref'
+Create a copy of array, that will be altered 'ans'
+
+Loop through ref, updated ans on each iteration
+    Get position in array
+    Add value of entry to position
+    Move value to new position
