@@ -1,14 +1,16 @@
 #!/bin/bash
 
 # Verfiy command line argument
-if [[ ! $1 ]]; then
-    echo "Error: missing argument! Usage: './setup.sh <day>'"
+if [ "$#" -ne 2 ] 
+then
+    echo "Error: missing argument! Usage: './setup.js.sh <year> <day>'"
     exit 1
 fi
-
 # Create new directory and files
-mkdir "$1"
+mkdir -p "$1"
 cd "$1"
+mkdir "$2"
+cd "$2"
 touch main.c build.sh input.txt
 
 # Write boilerplate to files, run first build
