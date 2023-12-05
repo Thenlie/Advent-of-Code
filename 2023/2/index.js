@@ -1,12 +1,10 @@
 // Target: 12 red, 13 green, and 14 blue
 const fs = require('fs');
 const data = fs.readFileSync('input.txt', 'utf8');
-// const data = fs.readFileSync('short-input.txt', 'utf8');
 const lines = data.split('\n');
-// const words = data.split(' ');
-// const chars = data.split('');
 
-const arr = [];
+const maxArr = [];
+const powerArr = [];
 let count = 0;
 
 for (let i = 0; i < lines.length; i++) {
@@ -25,19 +23,23 @@ for (let i = 0; i < lines.length; i++) {
   const maxRed = Math.max(...redCubes);
   const maxGreen = Math.max(...greenCubes);
   const maxBlue = Math.max(...blueCubes);
-
-  arr[i] = {
+  
+  maxArr[i] = {
     red: maxRed,
     green: maxGreen,
     blue: maxBlue,
   }
+
+  powerArr[i] = maxRed * maxGreen * maxBlue
 }
 
-for (let i = 0; i < arr.length; i++) {
-  if (arr[i].red > 12) continue;
-  if (arr[i].green > 13) continue;
-  if (arr[i].blue > 14) continue;
+for (let i = 0; i < maxArr.length; i++) {
+  if (maxArr[i].red > 12) continue;
+  if (maxArr[i].green > 13) continue;
+  if (maxArr[i].blue > 14) continue;
   count += i + 1;
 }
 
-console.log('Answer:', count)
+const totalPower = powerArr.reduce((a, b) => a + b, 0);
+
+console.log('Part 1 Answer:', count, '\nPart 2 Answer:', totalPower);
